@@ -1,0 +1,29 @@
+name: "SonarQube Analysis Action"
+description: "A custom GitHub Action to run SonarQube analysis for a Maven project"
+author: "Juan Felipe Jaramillo <juanfelipejaramillolosada@gmail.com>"
+inputs:
+  project_key:
+    description: "The SonarQube project key"
+    required: true
+  organization:
+    description: "The SonarQube organization"
+    required: true
+  host_url:
+    description: "The SonarQube host URL"
+    required: true
+  login_token:
+    description: "The SonarQube login token"
+    required: true
+  project_path:
+    description: "Path to the Maven project"
+    required: true
+    default: "./"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - "${{ inputs.project_key }}"
+    - "${{ inputs.organization }}"
+    - "${{ inputs.host_url }}"
+    - "${{ inputs.login_token }}"
+    - "${{ inputs.project_path }}"
